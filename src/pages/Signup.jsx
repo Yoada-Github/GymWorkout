@@ -26,7 +26,7 @@ function Signup() {
     }
 
     axios
-      .post("http://localhost:5003/user/signup", {username, email, password })
+      .post("https://gymworkoutback-1.onrender.com/user/signup", {username, email, password })
       .then((response) => {
         enqueueSnackbar("Signup successful! Please login.", { variant: "success" });
         navigate("/"); // Redirect to login page

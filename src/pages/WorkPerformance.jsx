@@ -15,7 +15,7 @@ const PerformanceTracking = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5003/gym/performance/${userId}`);
+      const response = await axios.get(`https://gymworkoutback-1.onrender.com/gym/performance/${userId}`);
       setPerformanceData(response.data);
     } catch (error) {
       console.error('Error fetching performance data:', error);
@@ -37,8 +37,8 @@ const PerformanceTracking = () => {
     e.preventDefault();
     const newPerformance = { ...formData, userId: userId, date: new Date(formData.date).getTime() };
     try {
-      const response = await axios.post('http://localhost:5003/gym/performance', newPerformance);
-      fetchData();  // Fetch data immediately after posting
+      const response = await axios.post('https://gymworkoutback-1.onrender.com/gym/performance', newPerformance);
+      fetchData();  
       setFormData({ date: '', weight: '', exerciseName: '', load: '', reps: '' });
     } catch (error) {
       console.error('Error saving performance:', error);
@@ -47,7 +47,7 @@ const PerformanceTracking = () => {
 
   const handleDeletePerformance = async (id) => {
     try {
-      await axios.delete(`http://localhost:5003/gym/performance/${id}`);
+      await axios.delete(`https://gymworkoutback-1.onrender.com/gym/performance/${id}`);
       enqueueSnackbar('Performance deleted successfully', { variant: 'success' });
       fetchData();
     } catch (error) {
@@ -66,7 +66,7 @@ const PerformanceTracking = () => {
       acc[date].exercises[data.exerciseName] = [];
     }
     acc[date].exercises[data.exerciseName].push({ load: data.load, reps: data.reps });
-    acc[date].ids.push(data._id); // Include _id in the grouped data
+    acc[date].ids.push(data._id);
     return acc;
   }, {});
 

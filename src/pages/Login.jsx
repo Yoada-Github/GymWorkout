@@ -19,7 +19,7 @@ function Login() {
     }
 
     axios
-      .post("http://localhost:5003/user/login", { username, email, password })
+      .post("https://gymworkoutback-1.onrender.com/user/login", { username, email, password })
       .then((response) => {
         const { username, email, token, userId } = response.data;
 

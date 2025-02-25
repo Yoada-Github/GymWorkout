@@ -6,7 +6,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 function EditGym() {
   const [day, setDay] = useState('');
   const [title, setTitle] = useState('');
-  const { id } = useParams(); // Get the `id` from the URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -21,7 +21,7 @@ function EditGym() {
         setLoading(false);
         return;
       }
-      const response = await axios.get(`http://localhost:5003/gym/workout-plan/${planId}`, { params: { userId: userId } });
+      const response = await axios.get(`https://gymworkoutback-1.onrender.com/gym/workout-plan/${planId}`, { params: { userId: userId } });
       const { day, title } = response.data;
       console.log(response);
 
@@ -42,7 +42,7 @@ function EditGym() {
   // Fetch gym details when the component mounts or when `id` changes
   useEffect(() => {
     if (id) {
-      fetchGymDetails(id); // Pass the `id` to the function
+      fetchGymDetails(id); 
     } else {
       console.error("Workout Plan ID is missing in the URL");
       setError("Workout Plan ID is missing in the URL.");
@@ -54,7 +54,7 @@ function EditGym() {
     setLoading(true);
 
     try {
-      await axios.put(`http://localhost:5003/gym/workout-plan/${id}`, data);
+      await axios.put(`https://gymworkoutback-1.onrender.com/gym/workout-plan/${id}`, data);
       alert('Gym plan updated successfully!');
       navigate('/workPlan');
     } catch (err) {

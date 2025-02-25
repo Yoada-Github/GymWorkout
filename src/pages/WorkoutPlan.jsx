@@ -20,7 +20,7 @@ const WorkoutPlan = () => {
   // Fetch workout plan from backend
   const fetchingData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5003/gym/workout-plan/`, {params: {userId: userId}})
+        const response = await axios.get(`https://gymworkoutback-1.onrender.com/gym/workout-plan/`, {params: {userId: userId}})
         setWorkoutPlan(response.data);
 
        } catch (error)  {
@@ -45,7 +45,7 @@ const WorkoutPlan = () => {
     const newWorkout = { title: exercise, day, userId };
 
     try {
-      const response = await axios.post("http://localhost:5003/gym/workout-plan", newWorkout);
+      const response = await axios.post("https://gymworkoutback-1.onrender.com/gym/workout-plan", newWorkout);
       setWorkoutPlan([...workoutPlan, response.data]); // Add new workout to UI
       setExercise(""); 
       fetchingData();
@@ -57,7 +57,7 @@ const WorkoutPlan = () => {
 
   const handleDeleteWorkout = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:5003/gym/workout-plan/${id}`);
+      const response = await axios.delete(`https://gymworkoutback-1.onrender.com/gym/workout-plan/${id}`);
       console.log('Workout deleted:', response.data);
       enqueueSnackbar('Workout deleted successfully', { variant: 'success' });
       fetchingData();

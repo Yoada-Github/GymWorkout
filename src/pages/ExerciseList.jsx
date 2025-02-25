@@ -17,7 +17,7 @@ const ExerciseList = () => {
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     axios
-      .get(`http://localhost:5003/gym/gyms/${userId}`)
+      .get(`https://gymworkoutback-1.onrender.com/gym/gyms/${userId}`)
       .then((response) => {
         setGyms(response.data);
       })

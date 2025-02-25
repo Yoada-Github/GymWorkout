@@ -18,7 +18,7 @@ function EditGym() {
     setLoading(true);
     try {
       const userId = localStorage.getItem('userId');
-      const response = await axios.get(`http://localhost:5003/gym/exercise/${id}`, {params: {userId: userId}});
+      const response = await axios.get(`https://gymworkoutback-1.onrender.com/gym/exercise/${id}`, {params: {userId: userId}});
       const { title, load, reps } = response.data;
       console.log(response.data)
 
@@ -47,7 +47,7 @@ function EditGym() {
     setLoading(true);
   
     try {
-      await axios.put(`http://localhost:5003/gym/exercise/${id}`, data); 
+      await axios.put(`https://gymworkoutback-1.onrender.com/gym/exercise/${id}`, data); 
       alert('Gym plan updated successfully!');
       navigate('/create');
     } catch (err) {

@@ -17,7 +17,7 @@ const Settings = () => {
   useEffect(() => {
     if (!userId) return;
 
-    axios.get(`http://localhost:5003/user/profile/${userId}`)
+    axios.get(`https://gymworkoutback-1.onrender.com/user/profile/${userId}`)
       .then((response) => setUser(response.data))
       .catch((error) => console.error("Error fetching profile:", error));
   }, [userId]);
@@ -27,7 +27,7 @@ const Settings = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:5003/user/update/${userId}`, { password });
+      await axios.put(`https://gymworkoutback-1.onrender.com/user/update/${userId}`, { password });
       setMessage({ type: "success", text: "Password updated successfully!" });
       setPassword("");
     } catch (error) {
@@ -39,7 +39,7 @@ const Settings = () => {
   // Handle Account Deletion
   const handleDeleteAccount = () => {
     if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-      axios.delete(`http://localhost:5003/user/delete/${userId}`)
+      axios.delete(`https://gymworkoutback-1.onrender.com/user/delete/${userId}`)
         .then(() => {
           alert("Account deleted successfully");
           navigate("/");

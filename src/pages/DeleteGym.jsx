@@ -13,7 +13,7 @@ const DeleteGym = () => {
 
   const handleDeleteWorkout = () => {
     axios
-      .delete(`http://localhost:5003/gym/delete/${id}`)
+      .delete(`https://gymworkoutback-1.onrender.com/gym/delete/${id}`)
       .then(() => {
         enqueueSnackbar('Gym deleted successfully', { variant: 'success' });
         navigate('/create');
