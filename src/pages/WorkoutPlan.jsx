@@ -20,7 +20,7 @@ const WorkoutPlan = () => {
   // Fetch workout plan from backend
   const fetchingData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5003/gym/workout-plan/${userId}`)
+        const response = await axios.get(`http://localhost:5003/gym/workout-plan/`, {params: {userId: userId}})
         setWorkoutPlan(response.data);
 
        } catch (error)  {

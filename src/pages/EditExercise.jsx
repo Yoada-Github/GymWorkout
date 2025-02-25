@@ -18,7 +18,7 @@ function EditGym() {
     setLoading(true);
     try {
       const userId = localStorage.getItem('userId');
-      const response = await axios.get(`http://localhost:5003/gym/gyms/exercise/${id}`, {params: {userId: userId}});
+      const response = await axios.get(`http://localhost:5003/gym/exercise/${id}`, {params: {userId: userId}});
       const { title, load, reps } = response.data;
       console.log(response.data)
 

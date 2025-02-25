@@ -1,25 +1,29 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoMdArrowRoundBack } from "react-icons/io";
 
-
 function EditGym() {
   const [day, setDay] = useState('');
   const [title, setTitle] = useState('');
-  const { id } = useParams();
-  const navigate = useNavigate(); 
+  const { id } = useParams(); // Get the `id` from the URL
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const fetchGymDetails = async (userId) => {
-
+  const fetchGymDetails = async (planId) => {
     setLoading(true);
     try {
       const userId = localStorage.getItem('userId');
-      const response = await axios.get(`http://localhost:5003/gym/workout-plan/getOne/${id}`, {params: {userId: userId}});
+      if (!planId) {
+        console.error("Workout Plan ID is missing");
+        setError("Invalid request. Workout Plan ID is missing.");
+        setLoading(false);
+        return;
+      }
+      const response = await axios.get(`http://localhost:5003/gym/workout-plan/${planId}`, { params: { userId: userId } });
       const { day, title } = response.data;
-      console.log(response.data)
+      console.log(response);
 
       if (day && title) {
         setDay(day);
@@ -35,17 +39,22 @@ function EditGym() {
     }
   };
 
-  // Added useEffect to fetch gym details on component mount
+  // Fetch gym details when the component mounts or when `id` changes
   useEffect(() => {
-    fetchGymDetails();
+    if (id) {
+      fetchGymDetails(id); // Pass the `id` to the function
+    } else {
+      console.error("Workout Plan ID is missing in the URL");
+      setError("Workout Plan ID is missing in the URL.");
+    }
   }, [id]);
 
   const handleEditGym = async () => {
     const data = { day, title };
     setLoading(true);
-  
+
     try {
-      await axios.put(`http://localhost:5003/gym/workout-plan/${id}`, data); 
+      await axios.put(`http://localhost:5003/gym/workout-plan/${id}`, data);
       alert('Gym plan updated successfully!');
       navigate('/workPlan');
     } catch (err) {
@@ -55,11 +64,12 @@ function EditGym() {
       setLoading(false);
     }
   };
+
   return (
     <div className="p-4 bg-light vh-100">
       {/* Back Button */}
-      <button onClick={() => navigate(-1)} className="btn btn-outline-secondary mb-4"style={{ width: '56px' }}>
-        <strong><IoMdArrowRoundBack className='fw-bold fs-2' /></strong> 
+      <button onClick={() => navigate(-1)} className="btn btn-outline-secondary mb-4" style={{ width: '56px' }}>
+        <strong><IoMdArrowRoundBack className='fw-bold fs-2' /></strong>
       </button>
       <h1 className="text-center text-primary mb-4 fw-bold">Edit Gym Plan</h1>
 
@@ -70,7 +80,7 @@ function EditGym() {
       )}
 
       {/* Form Container */}
-      <div className="card shadow-sm mx-auto bg-secondary " style={{ maxWidth: '500px', minHeight:"300px" }}>
+      <div className="card shadow-sm mx-auto bg-secondary" style={{ maxWidth: '500px', minHeight: "300px" }}>
         <div className="card-body p-5">
           {loading ? (
             <div className="text-center text-muted">
@@ -102,7 +112,7 @@ function EditGym() {
                   className="form-control"
                 />
               </div>
-              <button className="btn btn-primary w-100 py-1 my-3 fs-4"  onClick={handleEditGym} disabled={loading}>
+              <button className="btn btn-primary w-100 py-1 my-3 fs-4" onClick={handleEditGym} disabled={loading}>
                 {loading ? (
                   <>
                     <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
@@ -116,7 +126,7 @@ function EditGym() {
           )}
         </div>
       </div>
-  </div>
+    </div>
   );
 }
 

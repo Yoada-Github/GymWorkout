@@ -10,6 +10,7 @@ function Home() {
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
+    console.log(userId)
 
     if (!userId) {
       console.error("Error: No user ID found.");

@@ -102,7 +102,7 @@ const PerformanceTracking = () => {
                   <th>Date</th>
                   <th>Weight (kg)</th>
                   {exerciseNames.map(exercise => (
-                    <th colSpan="2" key={exercise}>{exercise}</th>
+                    <th colSpan="2" key={`header-${exercise}`}>{exercise}</th>
                   ))}
                   <th>Delete</th>
                 </tr>
@@ -111,8 +111,9 @@ const PerformanceTracking = () => {
                   <th></th>
                   {exerciseNames.map(exercise => (
                     <>
-                      <th key={`${exercise}-load`}>Load (kg)</th>
-                      <th key={`${exercise}-reps`}>Reps</th>
+                      <th key={`header-${exercise}-load`}>Load (kg)</th>
+                      <th key={`header-${exercise}-reps`}>Reps</th>
+
                     </>
                   ))}
                   <th></th>
@@ -125,20 +126,21 @@ const PerformanceTracking = () => {
                     <td>{data.weight}</td>
                     {exerciseNames.map(exercise => (
                       <>
-                        <td key={`${date}-${exercise}-load`}>
-                          {data.exercises[exercise] ? data.exercises[exercise].map((ex, idx) => (
-                            <div key={idx}>{ex.load}</div>
-                          )) : '-'}
-                        </td>
-                        <td key={`${date}-${exercise}-reps`}>
-                          {data.exercises[exercise] ? data.exercises[exercise].map((ex, idx) => (
-                            <div key={idx}>{ex.reps}</div>
-                          )) : '-'}
-                        </td>
+                       <td key={`${date}-${exercise}-load`}>
+                        {data.exercises[exercise] ? data.exercises[exercise].map((ex, idx) => (
+                          <div key={`${date}-${exercise}-load-${idx}`}>{ex.load}</div>
+                        )) : '-'}
+                      </td>
+                      <td key={`${date}-${exercise}-reps`}>
+                        {data.exercises[exercise] ? data.exercises[exercise].map((ex, idx) => (
+                          <div key={`${date}-${exercise}-reps-${idx}`}>{ex.reps}</div>
+                        )) : '-'}
+                      </td>
+
+
                       </>
                     ))}
                     <td>
-                      {/* Pass the first _id in the ids array for this date */}
                       <button onClick={() => handleDeletePerformance(data.ids[0])} className="btn btn-light btn-sm" style={{ width: "60px", justifyContent: "center" }}>
                         <MdDelete className='text-danger fw-bold fs-1' />
                       </button>
