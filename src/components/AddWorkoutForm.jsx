@@ -18,10 +18,9 @@ const AddWorkoutForm = ({ setGyms }) => {
 
     const userId = localStorage.getItem("userId");
     const newWorkout = { title, load, reps, userId, timestamp: new Date().toISOString() };
-    
 
     axios
-      .post("https://gymworkoutback-1.onrender.com/gym/", newWorkout)
+      .post("ttps://gymworkoutback-1.onrender.com/gym/", newWorkout)
       .then((response) => {
         setGyms((prevGyms) => [response.data, ...prevGyms]);
         setTitle("");
