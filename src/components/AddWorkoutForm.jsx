@@ -21,7 +21,7 @@ const AddWorkoutForm = ({ setGyms }) => {
     
 
     axios
-      .post("http://localhost:5003/gym/", newWorkout)
+      .post("https://gymworkoutback-1.onrender.com/gym/", newWorkout)
       .then((response) => {
         setGyms((prevGyms) => [response.data, ...prevGyms]);
         setTitle("");
