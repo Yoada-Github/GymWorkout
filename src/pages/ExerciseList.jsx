@@ -117,10 +117,10 @@ const ExerciseList = () => {
                       <Col key={exercise._id} md={4} className="mb-4">
                         <Card className="shadow-lg border-0 overflow-hidden">
                         <div className="gym-card-bg position-relative">
-                          {exerciseMedia[exercise.title] ? (
-                            exerciseMedia[exercise.title].endsWith(".mp4") ? (
+                          {exerciseMedia[exercise.title.toLowerCase()] ? (
+                            exerciseMedia[exercise.title.toLowerCase()].endsWith(".mp4") ? (
                               <video
-                                src={exerciseMedia[exercise.title]}
+                                src={exerciseMedia[exercise.title.toLowerCase()]}
                                 autoPlay
                                 loop
                                 muted
@@ -129,8 +129,8 @@ const ExerciseList = () => {
                               />
                             ) : (
                               <img
-                                src={exerciseMedia[exercise.title]}
-                                alt={exercise.title}
+                                src={exerciseMedia[exercise.title.toLowerCase()]}
+                                alt={exercise.title.toLowerCase()}
                                 className="w-75 mx-5 my-3"
                                 style={{ maxHeight: "25vh", maxWidth:"404px", objectFit: "cover" }}
                               />
