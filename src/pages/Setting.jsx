@@ -18,7 +18,10 @@ const Settings = () => {
     if (!userId) return;
 
     axios.get(`https://gymworkoutback-1.onrender.com/user/profile/${userId}`)
-      .then((response) => setUser(response.data))
+      .then((response) => {
+        console.log("User data:", response.data); // Debugging
+        setUser(response.data);
+      })
       .catch((error) => console.error("Error fetching profile:", error));
   }, [userId]);
 
