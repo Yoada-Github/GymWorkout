@@ -17,7 +17,7 @@ function Home() {
       return;
     }
     axios
-      .get(`ttps://gymworkoutback-1.onrender.com/gym/gyms/${userId}`)
+      .get(`https://gymworkoutback-1.onrender.com/gym/gyms/${userId}`)
       .then((response) => {
         setGyms(response.data);
       })
